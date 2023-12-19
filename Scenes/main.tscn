@@ -19,3 +19,16 @@ position = Vector2(79, 79)
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(63, 53)
 zoom = Vector2(2.6, 2.6)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "привет
+"
+
+[node name="Label2" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(1.04762, 2.55814)
+text = "привет
+"
