@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://doebwe5frtujc"]
+[gd_scene load_steps=3 format=3 uid="uid://doebwe5frtujc"]
 
 [ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://Scenes/home.tscn" id="1_bga1k"]
+[ext_resource type="PackedScene" uid="uid://c0q6gln1absvj" path="res://Particles/snow_particles.tscn" id="2_ibhta"]
 
 [node name="Main" type="Node2D"]
 
@@ -20,15 +21,5 @@ position = Vector2(79, 79)
 position = Vector2(63, 53)
 zoom = Vector2(2.6, 2.6)
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "привет
-"
-
-[node name="Label2" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-scale = Vector2(1.04762, 2.55814)
-text = "привет
-"
+[node name="snow_particles" parent="." instance=ExtResource("2_ibhta")]
+position = Vector2(80, -96)
