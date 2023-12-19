@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://doebwe5frtujc"]
+
+[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://Scenes/home.tscn" id="1_bga1k"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Home" parent="." instance=ExtResource("1_bga1k")]
+position = Vector2(28, 32)
+
+[node name="Home2" parent="." instance=ExtResource("1_bga1k")]
+position = Vector2(79, 32)
+
+[node name="Home3" parent="." instance=ExtResource("1_bga1k")]
+position = Vector2(28, 79)
+
+[node name="Home4" parent="." instance=ExtResource("1_bga1k")]
+position = Vector2(79, 79)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(63, 53)
+zoom = Vector2(2.6, 2.6)

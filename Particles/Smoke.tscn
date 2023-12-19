@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://jvqduren0t25"]
+
+[sub_resource type="Gradient" id="Gradient_dcwfu"]
+offsets = PackedFloat32Array(0, 0.532787, 1)
+colors = PackedColorArray(0.521141, 0.521141, 0.521141, 1, 0.650128, 0.650128, 0.650128, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lqwhf"]
+gradient = SubResource("Gradient_dcwfu")
+
+[sub_resource type="Curve" id="Curve_t026h"]
+_data = [Vector2(0.0266667, 0.538462), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.516483), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_exsas"]
+curve = SubResource("Curve_t026h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1r0gu"]
+radial_velocity_max = 25.0
+gravity = Vector3(0, -100, 0)
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_exsas")
+color_ramp = SubResource("GradientTexture1D_lqwhf")
+
+[node name="Smoke_particles" type="GPUParticles2D"]
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_1r0gu")
+lifetime = 0.5
+speed_scale = 0.3
+randomness = 1.0
+interpolate = false
