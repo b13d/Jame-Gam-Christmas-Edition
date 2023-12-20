@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://doebwe5frtujc"]
+[gd_scene load_steps=9 format=3 uid="uid://doebwe5frtujc"]
 
+[ext_resource type="PackedScene" uid="uid://dtxk8fnmc8q4g" path="res://Scenes/ground/ground.tscn" id="1_1hi1i"]
 [ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://Scenes/home/home.tscn" id="1_bga1k"]
 [ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://Scenes/goblin/Goblin.tscn" id="2_r4ang"]
 [ext_resource type="PackedScene" uid="uid://c0q6gln1absvj" path="res://Particles/snow_particles.tscn" id="4_qjh65"]
 [ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://Scenes/goblin_spawner/goblin_spawner.tscn" id="4_qvdx3"]
+[ext_resource type="PackedScene" uid="uid://bvoqk7fa1xjtg" path="res://Scenes/game_settings/game_settings.tscn" id="5_16vvf"]
+[ext_resource type="PackedScene" uid="uid://barmyp12p2dhw" path="res://Scenes/anvil/anvil.tscn" id="6_tsecc"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sw1b3"]
 vertices = PackedVector2Array(13, -10, 1019, 570, -988, 553, -53, -9, -173, -27, -80, -58, -239, -26, -974, -611, -266, -75, -115, -119, -142, -168, -20, -151, 7, -102, -14, -59, 1011, -646, 73, -103, -181, -118, -200, -76, 46, -152, -208, -167)
@@ -13,8 +16,11 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Main" type="Node2D"]
 
+[node name="Ground" parent="." instance=ExtResource("1_1hi1i")]
+
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(-91, -133)
+position = Vector2(-33, -105)
+zoom = Vector2(2, 2)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(22, -1)
@@ -44,3 +50,9 @@ position = Vector2(-22, 2)
 
 [node name="Snow_Particles" parent="." instance=ExtResource("4_qjh65")]
 position = Vector2(-127, -550)
+
+[node name="GameSettings" parent="." node_paths=PackedStringArray("anvils") instance=ExtResource("5_16vvf")]
+anvils = NodePath("../Anvils")
+anvil = ExtResource("6_tsecc")
+
+[node name="Anvils" type="Node2D" parent="."]
