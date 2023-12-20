@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7ji4c57nykwr"]
+
+[ext_resource type="Script" path="res://scenes/Goblin/Goblin.gd" id="1_lt1i1"]
+[ext_resource type="Texture2D" uid="uid://m242av7ji02q" path="res://icon.svg" id="1_xmtpl"]
+[ext_resource type="Texture2D" uid="uid://0r8owc1am1ov" path="res://Sprites/spr_goblin.png" id="2_snsu3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t7ne0"]
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i1qbn"]
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_feul5"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, -0.261799]
+}
+
+[sub_resource type="Animation" id="Animation_2mf57"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75qb1"]
+_data = {
+"RESET": SubResource("Animation_2mf57"),
+"idle": SubResource("Animation_feul5")
+}
+
+[node name="Goblin" type="CharacterBody2D"]
+script = ExtResource("1_lt1i1")
+
+[node name="Goblin_Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_snsu3")
+
+[node name="Gift_Icon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(24, -1)
+scale = Vector2(0.210118, 0.0844199)
+texture = ExtResource("1_xmtpl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_t7ne0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_i1qbn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(6.8, 4.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_75qb1")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,49 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://doebwe5frtujc"]
+[gd_scene load_steps=6 format=3 uid="uid://doebwe5frtujc"]
 
-[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://scenes/home/home.tscn" id="1_bga1k"]
-[ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://scenes/bandit/bandit.tscn" id="2_r4ang"]
-[ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://scenes/robber_creator/robber_creator.tscn" id="4_qvdx3"]
+[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://Scenes/home/home.tscn" id="1_bga1k"]
+[ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://Scenes/goblin/Goblin.tscn" id="2_r4ang"]
+[ext_resource type="PackedScene" uid="uid://c0q6gln1absvj" path="res://Particles/snow_particles.tscn" id="4_qjh65"]
+[ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://Scenes/goblin_spawner/goblin_spawner.tscn" id="4_qvdx3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sw1b3"]
-vertices = PackedVector2Array(1156, -711, 1156, 652, 27, -6, 33, -17, 86, -99, -1182, 663, -58, -5, -92, -51, -160, -23, 92, -110, 58, -155, -1180, -700, -27, -154, -33, -143, -130, -172, -96, -126, 2, -97, -215, -170, -221, -159, -273, -78, -102, -115, -86, -62, -154, -34, -188, -79, -186, -114, -2, -63, -244, -22, -279, -67)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(2, 1, 5, 6), PackedInt32Array(7, 6, 5, 8), PackedInt32Array(0, 9, 10), PackedInt32Array(11, 0, 10, 12), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(15, 14, 13, 16), PackedInt32Array(11, 14, 17), PackedInt32Array(5, 11, 17, 18, 19), PackedInt32Array(20, 21, 7, 22, 23, 24), PackedInt32Array(20, 15, 16, 25, 21), PackedInt32Array(8, 22, 7), PackedInt32Array(26, 8, 5), PackedInt32Array(27, 26, 5), PackedInt32Array(4, 9, 0), PackedInt32Array(16, 4, 3, 25), PackedInt32Array(24, 23, 19, 18), PackedInt32Array(5, 19, 27)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1165.85, 661.737, 1165.85, -722.354, -1189.79, -709.725, -1193.21, 674.365)])
+vertices = PackedVector2Array(13, -10, 1019, 570, -988, 553, -53, -9, -173, -27, -80, -58, -239, -26, -974, -611, -266, -75, -115, -119, -142, -168, -20, -151, 7, -102, -14, -59, 1011, -646, 73, -103, -181, -118, -200, -76, 46, -152, -208, -167)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(6, 4, 2), PackedInt32Array(6, 2, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 5), PackedInt32Array(14, 1, 0, 15), PackedInt32Array(12, 15, 0, 13), PackedInt32Array(16, 9, 5, 4, 17), PackedInt32Array(14, 15, 18), PackedInt32Array(7, 14, 18, 11, 10), PackedInt32Array(7, 10, 19), PackedInt32Array(17, 8, 7, 19, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1030, 581, 1014, -653, -984, -621, -999, 563)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Main" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(26, 37)
-zoom = Vector2(2.6, 2.6)
+position = Vector2(-91, -133)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(22, -2)
-scale = Vector2(-0.584979, -0.791856)
+position = Vector2(22, -1)
 navigation_polygon = SubResource("NavigationPolygon_sw1b3")
 
 [node name="Home" parent="NavigationRegion2D" groups=["home"] instance=ExtResource("1_bga1k")]
-position = Vector2(-170.946, -164.171)
-rotation = 3.14159
-scale = Vector2(1.70946, 1.26286)
+position = Vector2(-153.878, -126)
 
 [node name="Home2" parent="NavigationRegion2D" instance=ExtResource("1_bga1k")]
-position = Vector2(-229.068, -71.9828)
-rotation = 3.14159
-scale = Vector2(1.70946, 1.26286)
+position = Vector2(-212, -33.8118)
 
 [node name="Home3" parent="NavigationRegion2D" instance=ExtResource("1_bga1k")]
-position = Vector2(-42.7366, -55.5657)
-rotation = 3.14159
-scale = Vector2(1.70946, 1.26286)
+position = Vector2(-25.6686, -17.3947)
 
 [node name="Home4" parent="NavigationRegion2D" instance=ExtResource("1_bga1k")]
-position = Vector2(17.0946, -147.754)
-rotation = 3.14159
+position = Vector2(34.1626, -109.583)
+
+[node name="Goblin" parent="NavigationRegion2D" instance=ExtResource("2_r4ang")]
+position = Vector2(-56, -271)
 scale = Vector2(1.70946, 1.26286)
 
-[node name="bandit" parent="NavigationRegion2D" instance=ExtResource("2_r4ang")]
-position = Vector2(128.21, 41.6743)
-rotation = 3.14159
-scale = Vector2(1.70946, 1.26286)
+[node name="Goblin_Spawner" parent="NavigationRegion2D" node_paths=PackedStringArray("goblin_place") instance=ExtResource("4_qvdx3")]
+goblin_place = NodePath("../Goblins")
 
-[node name="Robber_creator2" parent="NavigationRegion2D" instance=ExtResource("4_qvdx3")]
+[node name="Goblins" type="Node2D" parent="NavigationRegion2D"]
+position = Vector2(-22, 2)
+
+[node name="Snow_Particles" parent="." instance=ExtResource("4_qjh65")]
+position = Vector2(-127, -550)

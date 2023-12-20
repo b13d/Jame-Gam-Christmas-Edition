@@ -4,12 +4,23 @@ extends CharacterBody2D
 var target = Vector2.ZERO
 var target2 = Vector2.ZERO
 
+func _ready():
+	$AnimationPlayer.play("idle")
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("click"):
 		target = get_global_mouse_position()
 		nav.target_position = target
 
-	var direction = -(nav.get_next_path_position() - global_position).normalized()
+	var direction = (nav.get_next_path_position() - global_position).normalized()
+	
+	print(direction)
+	
+	if direction.x < 0:
+		$Goblin_Icon.flip_h = true
+	else:
+		$Goblin_Icon.flip_h = false
+		
 	translate(direction * 100 * delta)
 
 

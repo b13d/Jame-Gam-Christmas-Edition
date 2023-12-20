@@ -2,22 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doxaasuwce5al"
-path.bptc="res://.godot/imported/Home.png-5913b047913bdecc765c9c76027fc920.bptc.ctex"
+uid="uid://0r8owc1am1ov"
+path="res://.godot/imported/spr_goblin.png-0e93a3135aef12c580a7df7a93558bbc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Home.png"
-dest_files=["res://.godot/imported/Home.png-5913b047913bdecc765c9c76027fc920.bptc.ctex"]
+source_file="res://Sprites/spr_goblin.png"
+dest_files=["res://.godot/imported/spr_goblin.png-0e93a3135aef12c580a7df7a93558bbc.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=true
+compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

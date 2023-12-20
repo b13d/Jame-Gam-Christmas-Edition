@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c0q6gln1absvj"]
 
-[node name="snow_particles" type="CPUParticles2D"]
-amount = 512
-lifetime = 3.0
-speed_scale = 0.1
+[node name="Snow_Particles" type="CPUParticles2D"]
+amount = 2048
+lifetime = 5.0
+preprocess = 5.0
+speed_scale = 0.2
 lifetime_randomness = 1.0
 emission_shape = 3
 emission_rect_extents = Vector2(300, 1)
