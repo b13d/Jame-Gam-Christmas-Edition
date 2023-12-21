@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 Events="*res://globals/events.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom_font="res://fonts/main_font.tres"
+
 [input]
 
 click={

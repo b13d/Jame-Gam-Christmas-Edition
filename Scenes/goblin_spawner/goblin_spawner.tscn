@@ -5,9 +5,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_hl56a"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1147, 7, 0, 0, 0, 0, 1151, 647, 0, 0, 0, 0, -1125, 651, 0, 0, 0, 0, -1157, -693, 0, 0, 0, 0, 1147, -701, 0, 0, 0, 0, 1147, 7)
+"points": PackedVector2Array(0, 0, 0, 0, -657, -256, 0, 0, 0, 0, -657, 166, 0, 0, 0, 0, 513, 171, 0, 0, 0, 0, 513, -249, 0, 0, 0, 0, -657, -256)
 }
-point_count = 6
+point_count = 5
 
 [node name="Goblin_Spawner" type="Node2D"]
 script = ExtResource("1_std2y")
@@ -17,7 +17,7 @@ goblin = ExtResource("2_yr3jj")
 curve = SubResource("Curve2D_hl56a")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(1147, 7)
+position = Vector2(-657, -256)
 rotates = false
 
 [node name="TimerSpawnGoblin" type="Timer" parent="."]

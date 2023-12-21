@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://danjlgc68fc70"]
+[gd_scene load_steps=3 format=3 uid="uid://danjlgc68fc70"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_4s1qg"]
+[ext_resource type="Texture2D" uid="uid://m242av7ji02q" path="res://icon.svg" id="2_3jw4f"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -10,3 +11,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4s1qg")
+
+[node name="Label_Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.453
+anchor_top = 0.0540123
+anchor_right = 0.547
+anchor_bottom = 0.157
+offset_left = 26.144
+offset_right = -26.144
+offset_bottom = -43.736
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "1213"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -232.0
+offset_top = 26.0
+offset_right = -32.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_3jw4f")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_3jw4f")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_3jw4f")
+expand_mode = 2

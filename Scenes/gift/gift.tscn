@@ -6,9 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evpn8"]
 size = Vector2(121, 124)
 
-[node name="Gift" type="StaticBody2D"]
+[node name="Gift" type="Area2D"]
 scale = Vector2(0.2, 0.2)
-input_pickable = true
 script = ExtResource("1_ecmhu")
 
 [node name="Sprite" type="Sprite2D" parent="."]

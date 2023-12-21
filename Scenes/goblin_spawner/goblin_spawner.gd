@@ -10,27 +10,21 @@ extends Node2D
 func _ready():
 	randomize()
 	pass
-	#Events.send_robber_to_house.connect(create_robber)
 
 func _process(delta):
 	pass
 
-func create_robber(pos):
+func create_goblin(pos):
 	var _goblin = goblin.instantiate()
 	path_follow_2d.progress_ratio = randf()
 	_goblin.global_position = path_follow_2d.global_position
-	#navigation_region_2d.add_child(_goblin)
-	goblin_place.add_child(_goblin)
-	_goblin.nav.target_position = pos
-	path_follow_2d.progress_ratio = randf()
-	_goblin.target2 = path_follow_2d.global_position
-	#_robber.global_position = pos
+	_goblin.target = pos
 	
-
+	goblin_place.add_child(_goblin)
+	path_follow_2d.progress_ratio = randf()
+	_goblin.place_to_out = path_follow_2d.global_position
 
 func _on_timer_spawn_goblin_timeout():
 	var current_house = get_node(String(arr_house[randi_range(0,3)]))
-	
-	#print(current_house.position)
-	create_robber(current_house.position)
+	create_goblin(current_house.position)
 	pass # Replace with function body.

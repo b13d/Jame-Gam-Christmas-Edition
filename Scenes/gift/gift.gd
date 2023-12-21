@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 
 var is_hover = false
 var was_taked = false
@@ -9,7 +9,7 @@ var closest_point = {"home": null,
 
 # на эту строку будет ругаться
 #@onready var houses = get_node("/root/TestScene/Houses")
-@onready var houses = get_node("/root/Main/NavigationRegion2D/Houses")
+@onready var houses = get_node("/root/Main/Houses")
 
 
 func _input(event):
@@ -21,14 +21,14 @@ func _input(event):
 			var differenceY = (i.global_position.y - self.global_position.y)**2
 			var new_point = abs(differenceX + differenceY)
 			
-			print(new_point)
+			#print(new_point)
 			
 			if closest_point.point == null or new_point < closest_point.point:
 				closest_point.home = i
 				closest_point.point = new_point
 				pass
 			
-			print(closest_point)
+			#print(closest_point)
 		
 		var new_elf = elf.instantiate()
 		new_elf.current_gift = self
@@ -50,3 +50,5 @@ func _on_mouse_exited():
 
 	#print("_on_mouse_exited")
 	pass # Replace with function body.
+
+
