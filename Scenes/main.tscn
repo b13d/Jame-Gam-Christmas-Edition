@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://doebwe5frtujc"]
+[gd_scene load_steps=10 format=3 uid="uid://dflrwc2whwoli"]
 
-[ext_resource type="PackedScene" uid="uid://dtxk8fnmc8q4g" path="res://Scenes/ground/ground.tscn" id="1_1hi1i"]
-[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://Scenes/home/home.tscn" id="1_bga1k"]
-[ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://Scenes/goblin/Goblin.tscn" id="2_r4ang"]
+[ext_resource type="PackedScene" uid="uid://dtxk8fnmc8q4g" path="res://scenes/ground/ground.tscn" id="1_1hi1i"]
+[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://scenes/home/home.tscn" id="1_bga1k"]
+[ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://scenes/goblin/Goblin.tscn" id="2_r4ang"]
 [ext_resource type="PackedScene" uid="uid://c0q6gln1absvj" path="res://Particles/snow_particles.tscn" id="4_qjh65"]
-[ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://Scenes/goblin_spawner/goblin_spawner.tscn" id="4_qvdx3"]
-[ext_resource type="PackedScene" uid="uid://bvoqk7fa1xjtg" path="res://Scenes/game_settings/game_settings.tscn" id="5_16vvf"]
-[ext_resource type="PackedScene" uid="uid://barmyp12p2dhw" path="res://Scenes/anvil/anvil.tscn" id="6_tsecc"]
+[ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://scenes/goblin_spawner/goblin_spawner.tscn" id="4_qvdx3"]
+[ext_resource type="Script" path="res://scripts/Houses.gd" id="4_yi4b1"]
+[ext_resource type="PackedScene" uid="uid://bvoqk7fa1xjtg" path="res://scenes/game_settings/game_settings.tscn" id="5_16vvf"]
+[ext_resource type="PackedScene" uid="uid://barmyp12p2dhw" path="res://scenes/anvil/anvil.tscn" id="6_tsecc"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sw1b3"]
 vertices = PackedVector2Array(13, -10, 1019, 570, -988, 553, -53, -9, -173, -27, -80, -58, -239, -26, -974, -611, -266, -75, -115, -119, -142, -168, -20, -151, 7, -102, -14, -59, 1011, -646, 73, -103, -181, -118, -200, -76, 46, -152, -208, -167)
@@ -26,27 +27,31 @@ zoom = Vector2(2, 2)
 position = Vector2(22, -1)
 navigation_polygon = SubResource("NavigationPolygon_sw1b3")
 
-[node name="Home" parent="NavigationRegion2D" groups=["home"] instance=ExtResource("1_bga1k")]
-position = Vector2(-153.878, -126)
-
-[node name="Home2" parent="NavigationRegion2D" instance=ExtResource("1_bga1k")]
-position = Vector2(-212, -33.8118)
-
-[node name="Home3" parent="NavigationRegion2D" instance=ExtResource("1_bga1k")]
-position = Vector2(-25.6686, -17.3947)
-
-[node name="Home4" parent="NavigationRegion2D" instance=ExtResource("1_bga1k")]
-position = Vector2(34.1626, -109.583)
-
 [node name="Goblin" parent="NavigationRegion2D" instance=ExtResource("2_r4ang")]
-position = Vector2(-56, -271)
+position = Vector2(-56, -894)
 scale = Vector2(1.70946, 1.26286)
 
 [node name="Goblin_Spawner" parent="NavigationRegion2D" node_paths=PackedStringArray("goblin_place") instance=ExtResource("4_qvdx3")]
 goblin_place = NodePath("../Goblins")
+arr_house = [NodePath("../Houses/Home"), NodePath("../Houses/Home2"), NodePath("../Houses/Home3"), NodePath("../Houses/Home4")]
 
 [node name="Goblins" type="Node2D" parent="NavigationRegion2D"]
 position = Vector2(-22, 2)
+
+[node name="Houses" type="Node2D" parent="NavigationRegion2D"]
+script = ExtResource("4_yi4b1")
+
+[node name="Home" parent="NavigationRegion2D/Houses" groups=["home"] instance=ExtResource("1_bga1k")]
+position = Vector2(-153.878, -126)
+
+[node name="Home2" parent="NavigationRegion2D/Houses" instance=ExtResource("1_bga1k")]
+position = Vector2(-212, -33.8118)
+
+[node name="Home3" parent="NavigationRegion2D/Houses" instance=ExtResource("1_bga1k")]
+position = Vector2(-25.6686, -17.3947)
+
+[node name="Home4" parent="NavigationRegion2D/Houses" instance=ExtResource("1_bga1k")]
+position = Vector2(34.1626, -109.583)
 
 [node name="Snow_Particles" parent="." instance=ExtResource("4_qjh65")]
 position = Vector2(-127, -550)
@@ -56,3 +61,6 @@ anvils = NodePath("../Anvils")
 anvil = ExtResource("6_tsecc")
 
 [node name="Anvils" type="Node2D" parent="."]
+
+[node name="Gifts" type="Node2D" parent="."]
+show_behind_parent = true

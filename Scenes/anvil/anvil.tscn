@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://barmyp12p2dhw"]
 
-[ext_resource type="Script" path="res://Scenes/anvil/anvil.gd" id="1_dcuab"]
+[ext_resource type="Script" path="res://scenes/anvil/anvil.gd" id="1_dcuab"]
 [ext_resource type="Texture2D" uid="uid://cawb2rsk21s72" path="res://Sprites/anvil.png" id="1_l070i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7qi3"]

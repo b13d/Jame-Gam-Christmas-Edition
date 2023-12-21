@@ -5,8 +5,12 @@ extends Node2D
 @onready var path_follow_2d = $Path2D/PathFollow2D
 @onready var navigation_region_2d = $".."
 
+@export var arr_house: Array
+
 func _ready():
-	Events.send_robber_to_house.connect(create_robber)
+	randomize()
+	pass
+	#Events.send_robber_to_house.connect(create_robber)
 
 func _process(delta):
 	pass
@@ -22,3 +26,11 @@ func create_robber(pos):
 	_goblin.target2 = path_follow_2d.global_position
 	#_robber.global_position = pos
 	
+
+
+func _on_timer_spawn_goblin_timeout():
+	var current_house = get_node(String(arr_house[randi_range(0,3)]))
+	
+	#print(current_house.position)
+	create_robber(current_house.position)
+	pass # Replace with function body.

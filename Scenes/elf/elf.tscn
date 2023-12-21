@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6umvg3mnh3jc"]
+
+[ext_resource type="Script" path="res://scenes/elf/elf.gd" id="1_p4uuh"]
+[ext_resource type="Texture2D" uid="uid://ccx73gd5vokb3" path="res://Sprites/spr_person.png" id="2_mge7r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj6xg"]
+radius = 17.0
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fimyk"]
+radius = 16.0
+height = 34.0
+
+[node name="Elf" type="CharacterBody2D"]
+script = ExtResource("1_p4uuh")
+
+[node name="SprPerson" type="Sprite2D" parent="."]
+position = Vector2(1, -2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_mge7r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+shape = SubResource("CapsuleShape2D_dj6xg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, -1)
+shape = SubResource("CapsuleShape2D_fimyk")
+
+[node name="Gift" type="Sprite2D" parent="."]
+position = Vector2(21, 0)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

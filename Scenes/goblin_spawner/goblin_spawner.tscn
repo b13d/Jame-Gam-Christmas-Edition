@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlyaov203q1oi"]
 
-[ext_resource type="Script" path="res://Scenes/goblin_spawner/goblin_spawner.gd" id="1_std2y"]
-[ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://Scenes/goblin/Goblin.tscn" id="2_yr3jj"]
+[ext_resource type="Script" path="res://scenes/goblin_spawner/goblin_spawner.gd" id="1_std2y"]
+[ext_resource type="PackedScene" uid="uid://b7ji4c57nykwr" path="res://scenes/goblin/Goblin.tscn" id="2_yr3jj"]
 
 [sub_resource type="Curve2D" id="Curve2D_hl56a"]
 _data = {
@@ -19,3 +19,8 @@ curve = SubResource("Curve2D_hl56a")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(1147, 7)
 rotates = false
+
+[node name="TimerSpawnGoblin" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TimerSpawnGoblin" to="." method="_on_timer_spawn_goblin_timeout"]

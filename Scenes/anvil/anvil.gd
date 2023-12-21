@@ -10,6 +10,7 @@ func _physics_process(delta):
 	if $Sprite.scale.x > .3:
 		$Sprite.scale -= Vector2(.1,.1)
 	else:
+		was_hit = true
 		await get_tree().create_timer(1).timeout
 		queue_free()
 	pass
