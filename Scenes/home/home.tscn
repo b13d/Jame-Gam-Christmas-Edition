@@ -9,6 +9,7 @@
 radius = 11.0454
 
 [node name="Home" type="Node2D"]
+z_index = -1
 script = ExtResource("1_j7lpq")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -20,13 +21,13 @@ centered = false
 position = Vector2(43, 25)
 
 [node name="target_robbery" parent="." groups=["entrance"] instance=ExtResource("3_t2io7")]
-position = Vector2(2, 14)
+position = Vector2(-1, 2)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(2, -5)
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-5, -19)
+position = Vector2(-2, -19)
 shape = SubResource("CircleShape2D_gle5y")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
