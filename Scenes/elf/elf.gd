@@ -50,7 +50,7 @@ func _go_to(pos):
 	
 	tween.tween_property(self, "global_position" ,pos, time_move)
 	
-	print("has_target: %s" % has_target)
+	#print("has_target: %s" % has_target)
 	
 	if not has_target:
 		await get_tree().create_timer(time_move).timeout
@@ -60,9 +60,9 @@ func _go_to(pos):
 
 
 func _on_area_2d_area_entered(area):
-	
 	if area == current_gift and has_target:
 		$Gift.texture = area.get_node("Sprite").texture
+		$Gift.self_modulate = area.get_node("Sprite").self_modulate
 		area.queue_free()
 		_go_to(get_parent().global_position)
 		has_target = false
@@ -82,13 +82,23 @@ func _on_area_2d_area_entered(area):
 	pass # Replace with function body.
 
 
-
-func _on_area_2d_area_exited(area):
-	print("aboba")
-	pass # Replace with function body.
-
-
 func _on_area_home_area_entered(area):
 	if area.get_parent() == get_parent() and not has_target:
+		if $Gift.self_modulate == Color.RED:
+			Global.gifts["red"] += 1
+	
+		if $Gift.self_modulate == Color.YELLOW:
+			Global.gifts["yellow"] += 1
+			
+		if $Gift.self_modulate == Color.GREEN:
+			Global.gifts["green"] += 1
+		
+		Global.count_gifts += 1
+		
+		print(Global.count_gifts)
+		
+		for i in Global.arr_gift_ui:
+			i.emit_signal("refresh_text")
+			pass
 		queue_free()
 	pass # Replace with function body.

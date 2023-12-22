@@ -25,6 +25,7 @@ func create_goblin(pos):
 	_goblin.place_to_out = path_follow_2d.global_position
 
 func _on_timer_spawn_goblin_timeout():
-	var current_house = get_node(String(arr_house[randi_range(0,3)]))
-	create_goblin(current_house.position)
+	if Global.count_gifts > 0:
+		var current_house = get_node(String(arr_house[randi_range(0,3)]))
+		create_goblin(current_house.position)
 	pass # Replace with function body.

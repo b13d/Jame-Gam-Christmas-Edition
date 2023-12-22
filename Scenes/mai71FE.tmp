@@ -1,32 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://dflrwc2whwoli"]
+[gd_scene load_steps=8 format=3 uid="uid://dflrwc2whwoli"]
 
 [ext_resource type="PackedScene" uid="uid://dtxk8fnmc8q4g" path="res://scenes/ground/ground.tscn" id="1_1hi1i"]
-[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_8cpke"]
 [ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://scenes/home/home.tscn" id="1_bga1k"]
 [ext_resource type="PackedScene" uid="uid://c0q6gln1absvj" path="res://Particles/snow_particles.tscn" id="4_qjh65"]
 [ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://scenes/goblin_spawner/goblin_spawner.tscn" id="4_qvdx3"]
 [ext_resource type="Script" path="res://scripts/Houses.gd" id="4_yi4b1"]
 [ext_resource type="PackedScene" uid="uid://bvoqk7fa1xjtg" path="res://scenes/game_settings/game_settings.tscn" id="5_16vvf"]
 [ext_resource type="PackedScene" uid="uid://barmyp12p2dhw" path="res://scenes/anvil/anvil.tscn" id="6_tsecc"]
-[ext_resource type="PackedScene" uid="uid://danjlgc68fc70" path="res://scenes/ui/ui.tscn" id="8_7s2b3"]
-[ext_resource type="PackedScene" uid="uid://m1eo3xeviamr" path="res://scenes/canvas_layer_messages/canvas_layer_messages.tscn" id="9_yt0ge"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_8cpke")
 
 [node name="Ground" parent="." instance=ExtResource("1_1hi1i")]
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-79, -57)
-zoom = Vector2(2, 2)
+zoom = Vector2(0.9, 0.9)
 
 [node name="Snow_Particles" parent="." instance=ExtResource("4_qjh65")]
 position = Vector2(-127, -550)
 
-[node name="GameSettings" parent="." node_paths=PackedStringArray("anvils", "canvas_message") instance=ExtResource("5_16vvf")]
+[node name="GameSettings" parent="." node_paths=PackedStringArray("anvils") instance=ExtResource("5_16vvf")]
 anvils = NodePath("../Anvils")
 anvil = ExtResource("6_tsecc")
-canvas_message = NodePath("../CanvasLayer_Messages")
 
 [node name="Anvils" type="Node2D" parent="."]
 
@@ -56,9 +51,3 @@ position = Vector2(-40, -16)
 
 [node name="Home4" parent="Houses" instance=ExtResource("1_bga1k")]
 position = Vector2(-44, -121)
-
-[node name="UI" parent="." instance=ExtResource("8_7s2b3")]
-
-[node name="CanvasLayer_Messages" parent="." instance=ExtResource("9_yt0ge")]
-
-[connection signal="show_message" from="." to="GameSettings" method="_on_main_show_message"]

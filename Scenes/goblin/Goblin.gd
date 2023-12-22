@@ -6,6 +6,7 @@ var place_to_out = Vector2.ZERO
 
 var is_run := false
 var was_hit := false
+var goblin_taked_gift = false
 
 var direction
 
@@ -38,6 +39,9 @@ func _on_area_2d_area_entered(area):
 			var new_gift = gift.instantiate()
 			var place_gifts = get_node("/root/Main/Gifts")
 			
+			
+			new_gift.get_node("Sprite").self_modulate = $Gift.get_node("Sprite").self_modulate
+
 			new_gift.position = self.position
 			place_gifts.call_deferred("add_child", new_gift)
 			$Gift.visible = false
@@ -51,10 +55,32 @@ func _on_area_2d_area_entered(area):
 # 		от стыда после потери подарка
 		pass
 
-	elif area.is_in_group("entrance"):
+	elif area.is_in_group("entrance") and Global.count_gifts > 0 and not goblin_taked_gift:
 		direction = (place_to_out - global_position).normalized()
 		
+		goblin_taked_gift = true
+		
+		var has_gift = [] 
+		
+		for i in Global.gifts:
+			if Global.gifts.get(i) > 0:
+				has_gift.append(i)
+			pass
+
+		var current_gift = has_gift[randi_range(0, has_gift.size() - 1)]
+		
+		Global.gifts[current_gift] = Global.gifts.get(current_gift) - 1
+		
+		#var Global.gifts.values()[randi_range(0, Global.gifts.size())] 
+		for i in Global.arr_gift_ui:
+			#print(i)
+			i.emit_signal("refresh_text")
+			pass
+		
+		Global.count_gifts -= 1
+		
 		if $Gift != null:
+			$Gift.get_node("Sprite").self_modulate = current_gift
 			$Gift.visible = true
 			$Gift.was_taked = true
 		
@@ -62,4 +88,6 @@ func _on_area_2d_area_entered(area):
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	if $Gift != null and $Gift.visible:
+		get_parent().get_parent().emit_signal("show_message")
 	queue_free()
