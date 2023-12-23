@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bihb6rcb2f4gs"
+path="res://.godot/imported/Gym Class.mp3-8851d3b502c85a5742e06b3c737f4852.mp3str"
+
+[deps]
+
+source_file="res://sounds/music_game/Gym Class.mp3"
+dest_files=["res://.godot/imported/Gym Class.mp3-8851d3b502c85a5742e06b3c737f4852.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

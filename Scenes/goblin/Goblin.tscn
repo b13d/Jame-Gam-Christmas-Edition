@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b7ji4c57nykwr"]
 
 [ext_resource type="Script" path="res://scenes/goblin/Goblin.gd" id="1_vmdcn"]
-[ext_resource type="Texture2D" uid="uid://0r8owc1am1ov" path="res://Sprites/spr_goblin.png" id="2_snsu3"]
+[ext_resource type="Texture2D" uid="uid://0r8owc1am1ov" path="res://sprites/spr_goblin.png" id="2_snsu3"]
 [ext_resource type="PackedScene" uid="uid://dcguc4xowi2if" path="res://scenes/gift/gift.tscn" id="3_exm8s"]
 [ext_resource type="AudioStream" uid="uid://d0jkxqvtwlfcl" path="res://sounds/inecraft_death.mp3" id="4_fxgo1"]
 
@@ -100,7 +100,8 @@ texture = ExtResource("2_snsu3")
 
 [node name="Gift" parent="." instance=ExtResource("3_exm8s")]
 visible = false
-position = Vector2(24, 0)
+position = Vector2(16, 0)
+scale = Vector2(0.4, 0.4)
 
 [node name="Area2D" type="Area2D" parent="."]
 

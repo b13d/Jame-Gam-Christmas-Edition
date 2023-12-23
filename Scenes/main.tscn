@@ -61,4 +61,8 @@ position = Vector2(-44, -121)
 
 [node name="CanvasLayer_Messages" parent="." instance=ExtResource("9_yt0ge")]
 
+[node name="AudioMain" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+
 [connection signal="show_message" from="." to="GameSettings" method="_on_main_show_message"]
+[connection signal="finished" from="AudioMain" to="." method="change_music"]

@@ -14,7 +14,7 @@ signal refresh_text
 func _ready():
 	Global.arr_gift_ui.append(self)
 	
-	self.self_modulate = Global.gifts.keys()[gift_id]
+	#self.self_modulate = Global.gifts.keys()[gift_id]
 	count_gift = Global.gifts.values()[gift_id]
 	$Label_Count.text = str(count_gift)
 	pass # Replace with function body.
@@ -25,7 +25,7 @@ func _process(delta):
 
 
 func _on_refresh_text():
-	self.self_modulate = Global.gifts.keys()[gift_id]
+	#self.self_modulate = Global.gifts.keys()[gift_id]
 	count_gift = Global.gifts.values()[gift_id]
 	$Label_Count.text = str(count_gift)
 	pass # Replace with function body.

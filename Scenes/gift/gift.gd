@@ -7,10 +7,17 @@ var closest_point = {"home": null,
 "point":null
 }
 
+var gift_id
+
+var elf_sprite_arr = [preload("res://sprites/elf/elf_01.png"), preload("res://sprites/elf/elf_02.png"), preload("res://sprites/elf/elf_03.png")] 
+
 # на эту строку будет ругаться
 #@onready var houses = get_node("/root/TestScene/Houses")
 @onready var houses = get_node("/root/Main/Houses")
 
+
+func _ready():
+	randomize()
 
 func _input(event):
 	if event.is_action_pressed("take_gift") and is_hover and not was_taked:
@@ -33,6 +40,10 @@ func _input(event):
 		var new_elf = elf.instantiate()
 		new_elf.current_gift = self
 		new_elf.has_target = true
+		
+		var current_elf_sprite = randi_range(0, elf_sprite_arr.size() - 1)
+		new_elf.get_node("SprPerson").texture = elf_sprite_arr[current_elf_sprite]
+		new_elf.get_node("AnimationPlayer").play("idle")
 		closest_point.home.add_child(new_elf)
 		new_elf._go_to(self.position)
 		pass

@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://barmyp12p2dhw"]
+[gd_scene load_steps=5 format=3 uid="uid://barmyp12p2dhw"]
 
 [ext_resource type="Script" path="res://scenes/anvil/anvil.gd" id="1_dcuab"]
-[ext_resource type="Texture2D" uid="uid://cawb2rsk21s72" path="res://Sprites/anvil.png" id="1_l070i"]
+[ext_resource type="Texture2D" uid="uid://cawb2rsk21s72" path="res://sprites/anvil.png" id="1_l070i"]
+[ext_resource type="AudioStream" uid="uid://da136ur1asp5x" path="res://sounds/anvil_down.wav" id="3_vct6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7qi3"]
 size = Vector2(27, 22)
 
 [node name="Anvil" type="Area2D" groups=["anvil"]]
+z_index = 1
 script = ExtResource("1_dcuab")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -16,5 +18,9 @@ shape = SubResource("RectangleShape2D_v7qi3")
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_l070i")
+
+[node name="AudioAnvilDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vct6j")
+volume_db = -5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

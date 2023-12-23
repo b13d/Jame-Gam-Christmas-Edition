@@ -4,7 +4,7 @@ var time := 0
 var gifts := {
 	"red": 3,
 	"yellow": 3,
-	"green": 3
+	"blue": 3
 }
 
 var count_gifts = 9

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c16ogdyg3vcw8"
+path="res://.godot/imported/01.1 Walking Theme.mp3-1adb004ba495c219f8dafe4a1c6b26c7.mp3str"
+
+[deps]
+
+source_file="res://sounds/music_game/01.1 Walking Theme.mp3"
+dest_files=["res://.godot/imported/01.1 Walking Theme.mp3-1adb004ba495c219f8dafe4a1c6b26c7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -8,6 +8,7 @@ var has_target := false
 var home: Node2D
 var stay := false
 
+var gift_id 
 @export var speed := 5
 
 
@@ -23,10 +24,7 @@ func _ready():
 
 func _physics_process(delta):
 	pass
-	#if not stay:
-		#if self.position != current_pos:
-			#self.position -= direction
-		#pass
+
 		
 func _go_to(pos):
 	var tween = get_tree().create_tween()
@@ -48,6 +46,14 @@ func _go_to(pos):
 	
 	#print(difference)
 	
+	print("global_position: %s" % global_position)
+	print("pos: %s " % pos)
+	if global_position.x < pos.x:
+		$SprPerson.flip_h = false
+	else:
+		$SprPerson.flip_h = true
+		
+	
 	tween.tween_property(self, "global_position" ,pos, time_move)
 	
 	#print("has_target: %s" % has_target)
@@ -61,8 +67,11 @@ func _go_to(pos):
 
 func _on_area_2d_area_entered(area):
 	if area == current_gift and has_target:
+		$AudioTakedGift.play()
+		
 		$Gift.texture = area.get_node("Sprite").texture
-		$Gift.self_modulate = area.get_node("Sprite").self_modulate
+		gift_id = area.gift_id
+		#$Gift.self_modulate = area.get_node("Sprite").self_modulate
 		area.queue_free()
 		_go_to(get_parent().global_position)
 		has_target = false
@@ -84,18 +93,18 @@ func _on_area_2d_area_entered(area):
 
 func _on_area_home_area_entered(area):
 	if area.get_parent() == get_parent() and not has_target:
-		if $Gift.self_modulate == Color.RED:
+		if gift_id == 0:
 			Global.gifts["red"] += 1
 	
-		if $Gift.self_modulate == Color.YELLOW:
+		if gift_id == 1:
 			Global.gifts["yellow"] += 1
 			
-		if $Gift.self_modulate == Color.GREEN:
-			Global.gifts["green"] += 1
+		if gift_id == 2:
+			Global.gifts["blue"] += 1
 		
 		Global.count_gifts += 1
 		
-		print(Global.count_gifts)
+		#print(Global.count_gifts)
 		
 		for i in Global.arr_gift_ui:
 			i.emit_signal("refresh_text")

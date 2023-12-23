@@ -9,6 +9,8 @@ var was_hit := false
 var goblin_taked_gift = false
 
 var direction
+var id_gift = 0
+
 
 func _ready():
 	$AnimationPlayer.play("idle")
@@ -40,8 +42,9 @@ func _on_area_2d_area_entered(area):
 			var place_gifts = get_node("/root/Main/Gifts")
 			
 			
-			new_gift.get_node("Sprite").self_modulate = $Gift.get_node("Sprite").self_modulate
+			new_gift.get_node("Sprite").texture = $Gift.get_node("Sprite").texture
 
+			new_gift.gift_id = id_gift
 			new_gift.position = self.position
 			place_gifts.call_deferred("add_child", new_gift)
 			$Gift.visible = false
@@ -67,7 +70,12 @@ func _on_area_2d_area_entered(area):
 				has_gift.append(i)
 			pass
 
+		if has_gift.size() == 0:
+			return false
+
 		var current_gift = has_gift[randi_range(0, has_gift.size() - 1)]
+		
+		print(current_gift)
 		
 		Global.gifts[current_gift] = Global.gifts.get(current_gift) - 1
 		
@@ -79,8 +87,16 @@ func _on_area_2d_area_entered(area):
 		
 		Global.count_gifts -= 1
 		
+		
+		if current_gift == "red":
+			id_gift = 0
+		elif current_gift == "yellow":
+			id_gift = 1
+		elif current_gift == "blue":
+			id_gift = 2
+		
 		if $Gift != null:
-			$Gift.get_node("Sprite").self_modulate = current_gift
+			$Gift.get_node("Sprite").texture = Global.arr_gift_ui[id_gift].texture
 			$Gift.visible = true
 			$Gift.was_taked = true
 		

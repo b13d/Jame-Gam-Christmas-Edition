@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://danjlgc68fc70"]
+[gd_scene load_steps=6 format=3 uid="uid://danjlgc68fc70"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_4s1qg"]
 [ext_resource type="PackedScene" uid="uid://bfby1v87j8e32" path="res://scenes/gift_rect/gift.tscn" id="2_ivtub"]
+[ext_resource type="Texture2D" uid="uid://c63me066agjol" path="res://sprites/gift/gift_01.png" id="3_h203c"]
+[ext_resource type="Texture2D" uid="uid://dl288qlf65xh7" path="res://sprites/gift/gift_02.png" id="4_rtori"]
+[ext_resource type="Texture2D" uid="uid://b1p8eqwb7vlc6" path="res://sprites/gift/gift_03.png" id="5_webui"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_4s1qg")
@@ -40,16 +43,21 @@ columns = 3
 [node name="Gift" parent="GridContainer" instance=ExtResource("2_ivtub")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+texture = ExtResource("3_h203c")
 expand_mode = 2
+color = Color(1, 0, 0, 1)
 
 [node name="Gift2" parent="GridContainer" instance=ExtResource("2_ivtub")]
 layout_mode = 2
+texture = ExtResource("4_rtori")
 expand_mode = 2
+color = Color(1, 1, 0, 1)
 gift_id = 1
 
 [node name="Gift3" parent="GridContainer" instance=ExtResource("2_ivtub")]
 layout_mode = 2
-expand_mode = 2
+texture = ExtResource("5_webui")
+color = Color(0, 0, 1, 1)
 gift_id = 2
 
 [node name="Timer_Time" type="Timer" parent="."]

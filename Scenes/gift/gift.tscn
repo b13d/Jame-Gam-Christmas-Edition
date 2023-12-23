@@ -7,7 +7,7 @@
 size = Vector2(121, 124)
 
 [node name="Gift" type="Area2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.45, 0.45)
 script = ExtResource("1_ecmhu")
 
 [node name="Sprite" type="Sprite2D" parent="."]

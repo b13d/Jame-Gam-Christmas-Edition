@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6umvg3mnh3jc"]
+[gd_scene load_steps=12 format=3 uid="uid://b6umvg3mnh3jc"]
 
 [ext_resource type="Script" path="res://scenes/elf/elf.gd" id="1_p4uuh"]
-[ext_resource type="Texture2D" uid="uid://ccx73gd5vokb3" path="res://Sprites/spr_person.png" id="2_mge7r"]
+[ext_resource type="Texture2D" uid="uid://cyb5jigcgd1uc" path="res://sprites/elf/elf_01.png" id="2_70r6i"]
+[ext_resource type="AudioStream" uid="uid://1aisjbk0khee" path="res://sounds/steps_01.mp3" id="3_568h1"]
+[ext_resource type="AudioStream" uid="uid://c4r2k0dw2yj61" path="res://sounds/steps_02.mp3" id="4_6yx0u"]
+[ext_resource type="AudioStream" uid="uid://cwa1kraolgut4" path="res://sounds/take_gift.wav" id="5_b551g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj6xg"]
 radius = 9.0
@@ -14,13 +17,99 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jo8yi"]
 radius = 9.0
 
+[sub_resource type="Animation" id="Animation_f0fee"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SprPerson:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, 0.0, -0.261799, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStepsLeft:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStepsRight:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_cdwwr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SprPerson:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStepsLeft:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStepsRight:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gs67k"]
+_data = {
+"RESET": SubResource("Animation_cdwwr"),
+"idle": SubResource("Animation_f0fee")
+}
+
 [node name="Elf" type="CharacterBody2D" groups=["elf"]]
 script = ExtResource("1_p4uuh")
 
 [node name="SprPerson" type="Sprite2D" parent="."]
 position = Vector2(1, -2)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_mge7r")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_70r6i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
@@ -34,7 +123,7 @@ shape = SubResource("CapsuleShape2D_fimyk")
 
 [node name="Gift" type="Sprite2D" parent="."]
 position = Vector2(21, 0)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.4, 0.4)
 
 [node name="AreaHome" type="Area2D" parent="."]
 monitoring = false
@@ -43,6 +132,23 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHome"]
 position = Vector2(1, 2)
 shape = SubResource("CircleShape2D_jo8yi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gs67k")
+}
+
+[node name="AudioStepsLeft" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_568h1")
+volume_db = -24.0
+
+[node name="AudioStepsRight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6yx0u")
+volume_db = -24.0
+
+[node name="AudioTakedGift" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b551g")
+volume_db = -5.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="AreaHome" to="." method="_on_area_home_area_entered"]
