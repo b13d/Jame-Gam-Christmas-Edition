@@ -5,6 +5,9 @@ extends Node2D
 @export var canvas_message: CanvasLayer
 
 func _input(event):
+	if Global.game_is_over:
+		return
+	
 	if event.is_action_pressed("click"):
 		var new_anvil = anvil.instantiate()
 		new_anvil.get_node("AnimationPlayer").play("idle")

@@ -12,6 +12,8 @@ signal refresh_text
 #}
 
 func _ready():
+	if Global.arr_gift_ui.size() > 0 and Global.arr_gift_ui[0] == null:
+		Global.arr_gift_ui.remove_at(0)
 	Global.arr_gift_ui.append(self)
 	
 	#self.self_modulate = Global.gifts.keys()[gift_id]

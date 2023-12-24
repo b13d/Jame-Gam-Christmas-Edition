@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://cuic7m6i66mx1"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_3808m"]
+[ext_resource type="PackedScene" uid="uid://d2f3n1wdsaeon" path="res://scenes/ground/ground.tscn" id="2_3c65n"]
+[ext_resource type="PackedScene" uid="uid://c0q6gln1absvj" path="res://Particles/snow_particles.tscn" id="3_8gnrb"]
+[ext_resource type="PackedScene" uid="uid://bvoqk7fa1xjtg" path="res://scenes/game_settings/game_settings.tscn" id="4_te5ey"]
+[ext_resource type="PackedScene" uid="uid://barmyp12p2dhw" path="res://scenes/anvil/anvil.tscn" id="5_7sh1n"]
+[ext_resource type="PackedScene" uid="uid://dlyaov203q1oi" path="res://scenes/goblin_spawner/goblin_spawner.tscn" id="6_7rb2j"]
+[ext_resource type="Script" path="res://scripts/Houses.gd" id="7_tclr6"]
+[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://scenes/home/home.tscn" id="8_rfpkt"]
+[ext_resource type="PackedScene" uid="uid://danjlgc68fc70" path="res://scenes/ui/ui.tscn" id="9_guggv"]
+[ext_resource type="PackedScene" uid="uid://m1eo3xeviamr" path="res://scenes/canvas_layer_messages/canvas_layer_messages.tscn" id="10_5ya0w"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_3808m")
+
+[node name="Ground" parent="." instance=ExtResource("2_3c65n")]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(-79, -57)
+zoom = Vector2(2, 2)
+
+[node name="Snow_Particles" parent="." instance=ExtResource("3_8gnrb")]
+position = Vector2(-127, -550)
+
+[node name="GameSettings" parent="." node_paths=PackedStringArray("anvils", "canvas_message") instance=ExtResource("4_te5ey")]
+anvils = NodePath("../Anvils")
+anvil = ExtResource("5_7sh1n")
+canvas_message = NodePath("../CanvasLayer_Messages")
+
+[node name="Anvils" type="Node2D" parent="."]
+
+[node name="Gifts" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="Goblin_Spawner" parent="." node_paths=PackedStringArray("goblin_place") instance=ExtResource("6_7rb2j")]
+position = Vector2(22, -1)
+goblin_place = NodePath("../Goblins")
+arr_house = [NodePath("../Houses/Home")]
+
+[node name="Goblins" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="Houses" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(22, -1)
+script = ExtResource("7_tclr6")
+
+[node name="Home" parent="Houses" groups=["home"] instance=ExtResource("8_rfpkt")]
+z_index = 0
+position = Vector2(-80, -28)
+
+[node name="UI" parent="." instance=ExtResource("9_guggv")]
+
+[node name="CanvasLayer_Messages" parent="." instance=ExtResource("10_5ya0w")]
+
+[node name="AudioMain" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+
+[connection signal="show_message" from="." to="GameSettings" method="_on_main_show_message"]
+[connection signal="finished" from="AudioMain" to="." method="change_music"]

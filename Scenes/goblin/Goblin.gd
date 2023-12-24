@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
+var spr_goblin_01 = preload("res://sprites/goblin_01.png")
+var spr_goblin_02 = preload("res://sprites/goblin_02.png")
+var spr_goblin_03 = preload("res://sprites/spr_goblin.png")
+
 @export var gift: PackedScene
 var target = Vector2.ZERO
 var place_to_out = Vector2.ZERO
+var lose_window = preload("res://scenes/lose_window/lose_window.tscn")
 
 var is_run := false
 var was_hit := false
@@ -10,24 +15,41 @@ var goblin_taked_gift = false
 
 var direction
 var id_gift = 0
+var speed: float = 1.0
 
 
 func _ready():
+	var rnd_number = randi_range(0, 2)
+	
+	var arr_sprites = [spr_goblin_01, spr_goblin_02, spr_goblin_03]
+	
+	
+	$Goblin_Icon.texture = arr_sprites[rnd_number]
+	speed += 0.1 * Global.current_level
+	print("speed %s" % speed)
 	$AnimationPlayer.play("idle")
 	direction = (target - global_position).normalized()
 	
 func _physics_process(delta):
+	if Global.game_is_over:
+		return
+	
 	if direction.x < 0:
 		$Goblin_Icon.flip_h = true
 	else:
 		$Goblin_Icon.flip_h = false
 		
 	if not was_hit:
-		self.position += direction
+		self.position += direction * speed 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	if $Pocket.get_child_count() != 0:
 		Global.count_gifts_lost += 1
+		
+		if Global.count_gifts_lost == Global.count_gifts_start:
+			Global.game_is_over = true
+			get_node("/root/Main").add_child(lose_window.instantiate())
+			pass
 		get_parent().get_parent().emit_signal("show_message")
 	queue_free()
 
@@ -128,7 +150,7 @@ func destory_gift_on_ground(old_gift):
 	pass
 
 func check_count_gifts(area):
-	if Global.count_gifts_lost == 9:
+	if Global.count_gifts_lost == Global.count_gifts:
 		return false
 	if area.is_in_group("gift"):
 		if area.was_taked:

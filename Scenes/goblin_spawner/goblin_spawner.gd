@@ -11,8 +11,6 @@ func _ready():
 	randomize()
 	pass
 
-func _process(delta):
-	pass
 
 func create_goblin(pos):
 	var _goblin = goblin.instantiate()
@@ -28,7 +26,15 @@ func create_goblin(pos):
 	_goblin.place_to_out = path_follow_2d.global_position
 
 func _on_timer_spawn_goblin_timeout():
-	if Global.count_gifts_lost != 9:
-		var current_house = get_node(String(arr_house[randi_range(0,3)]))
+	if $TimerSpawnGoblin.wait_time != (1 - Global.current_level / 10):
+		print(1 - Global.current_level / 10)
+		$TimerSpawnGoblin.set_wait_time(1 - Global.current_level / 10)
+		pass 
+	
+	if Global.game_is_over:
+		return
+	
+	if Global.count_gifts_lost != Global.count_gifts_start:
+		var current_house = get_node(String(arr_house[randi_range(0,arr_house.size() - 1)]))
 		create_goblin(current_house.position)
 	pass # Replace with function body.

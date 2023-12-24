@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfe4k3kn2860w"]
+
+[ext_resource type="Script" path="res://scenes/winner_window/winner_window.gd" id="1_26lhg"]
+
+[node name="Winner_Window" type="CanvasLayer"]
+script = ExtResource("1_26lhg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_right = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = -153.0
+offset_right = 166.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Congratulations you passed the level!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button_Return" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = 56.0
+offset_right = 141.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[connection signal="pressed" from="ColorRect/Button_Return" to="." method="_on_button_return_pressed"]

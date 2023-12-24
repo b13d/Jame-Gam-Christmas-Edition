@@ -22,11 +22,11 @@ func _ready():
 	start_pos = self.position
 	pass
 
-func _physics_process(delta):
-	pass
-
 		
 func _go_to(pos):
+	if Global.game_is_over:
+		return
+	
 	var tween = get_tree().create_tween()
 	
 	var differenceX = (pos.x - global_position.x)**2

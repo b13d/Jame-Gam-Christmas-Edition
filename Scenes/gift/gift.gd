@@ -21,6 +21,9 @@ func _ready():
 	randomize()
 
 func _input(event):
+	if Global.game_is_over:
+		return
+	
 	if event.is_action_pressed("take_gift") and is_hover and not was_taked:
 		was_taked = true
 		
