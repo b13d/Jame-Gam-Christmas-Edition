@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfby1v87j8e32"]
+
+[ext_resource type="Texture2D" uid="uid://m242av7ji02q" path="res://icon.svg" id="1_oip0f"]
+[ext_resource type="Script" path="res://scenes/gift_rect/gift_rect.gd" id="2_vjhg3"]
+
+[node name="Gift" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_oip0f")
+script = ExtResource("2_vjhg3")
+
+[node name="Label_Count" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.477
+anchor_top = 1.0
+anchor_right = 0.477
+anchor_bottom = 1.0
+offset_left = -20.056
+offset_top = 4.0
+offset_right = 19.944
+offset_bottom = 40.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="refresh_text" from="." to="." method="_on_refresh_text"]

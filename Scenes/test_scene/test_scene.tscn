@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcrwaprijvipb"]
+
+[ext_resource type="PackedScene" uid="uid://dcguc4xowi2if" path="res://scenes/gift/gift.tscn" id="2_8v2e0"]
+[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://scenes/home/home.tscn" id="3_qx0wo"]
+[ext_resource type="Script" path="res://scripts/Houses.gd" id="4_dd7ff"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Gift" parent="." instance=ExtResource("2_8v2e0")]
+position = Vector2(99, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.6, 2.6)
+
+[node name="Houses" type="Node2D" parent="."]
+script = ExtResource("4_dd7ff")
+
+[node name="Home" parent="Houses" instance=ExtResource("3_qx0wo")]
+position = Vector2(-4, 30)

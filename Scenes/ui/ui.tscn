@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://danjlgc68fc70"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_4s1qg"]
+[ext_resource type="PackedScene" uid="uid://bfby1v87j8e32" path="res://scenes/gift_rect/gift.tscn" id="2_ivtub"]
+[ext_resource type="Texture2D" uid="uid://c63me066agjol" path="res://sprites/gift/gift_01.png" id="3_h203c"]
+[ext_resource type="Texture2D" uid="uid://dl288qlf65xh7" path="res://sprites/gift/gift_02.png" id="4_rtori"]
+[ext_resource type="Texture2D" uid="uid://b1p8eqwb7vlc6" path="res://sprites/gift/gift_03.png" id="5_webui"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_4s1qg")
+
+[node name="Label_Time" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.453
+anchor_top = 0.0540123
+anchor_right = 0.547
+anchor_bottom = 0.157
+offset_left = 26.144
+offset_right = -26.144
+offset_bottom = -43.736
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 36
+text = "1213"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -147.0
+offset_top = 14.0
+offset_right = -19.0
+offset_bottom = 86.0
+grow_horizontal = 0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 3
+
+[node name="Gift" parent="GridContainer" instance=ExtResource("2_ivtub")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("3_h203c")
+expand_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Gift2" parent="GridContainer" instance=ExtResource("2_ivtub")]
+layout_mode = 2
+texture = ExtResource("4_rtori")
+expand_mode = 2
+color = Color(1, 1, 0, 1)
+gift_id = 1
+
+[node name="Gift3" parent="GridContainer" instance=ExtResource("2_ivtub")]
+layout_mode = 2
+texture = ExtResource("5_webui")
+color = Color(0, 0, 1, 1)
+gift_id = 2
+
+[node name="Timer_Time" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer_Time" to="." method="_on_timer_time_timeout"]

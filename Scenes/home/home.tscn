@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu0p5a36mtge3"]
+[gd_scene load_steps=6 format=3 uid="uid://cu0p5a36mtge3"]
 
 [ext_resource type="Texture2D" uid="uid://doxaasuwce5al" path="res://sprites/Home.png" id="1_hgey8"]
 [ext_resource type="Script" path="res://scenes/home/home.gd" id="1_j7lpq"]
-[ext_resource type="PackedScene" uid="uid://jvqduren0t25" path="res://particles/smoke.tscn" id="2_045j6"]
+[ext_resource type="PackedScene" uid="uid://jvqduren0t25" path="res://Particles/Smoke.tscn" id="2_045j6"]
 [ext_resource type="PackedScene" uid="uid://cnuyxkwhafbon" path="res://scenes/home/target_robbery.tscn" id="3_t2io7"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gle5y"]
+radius = 11.0454
+
 [node name="Home" type="Node2D"]
+z_index = -1
 script = ExtResource("1_j7lpq")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -17,12 +21,15 @@ centered = false
 position = Vector2(43, 25)
 
 [node name="target_robbery" parent="." groups=["entrance"] instance=ExtResource("3_t2io7")]
-position = Vector2(2, 4)
+position = Vector2(-1, 2)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(2, -5)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-37, -31, -21, -2, 22, -3, 6, -32)
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, -19)
+shape = SubResource("CircleShape2D_gle5y")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
 [node name="send_robber" type="Timer" parent="."]
 autostart = true

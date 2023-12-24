@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7ji4c57nykwr"]
+
+[ext_resource type="Script" path="res://scenes/goblin/goblin.gd" id="1_dxx35"]
+[ext_resource type="PackedScene" uid="uid://dcguc4xowi2if" path="res://scenes/gift/gift.tscn" id="2_3qee2"]
+[ext_resource type="Texture2D" uid="uid://0r8owc1am1ov" path="res://sprites/spr_goblin.png" id="3_cpc2y"]
+[ext_resource type="AudioStream" uid="uid://d0jkxqvtwlfcl" path="res://sounds/inecraft_death.mp3" id="4_du0fm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t7ne0"]
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i1qbn"]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_2mf57"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_lwdu7"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goblin_Icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.207843, 0.121569, 1), Color(1, 0.207843, 0.121569, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, -0.261799]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioHit:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_feul5"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, -0.261799]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75qb1"]
+_data = {
+"RESET": SubResource("Animation_2mf57"),
+"hit": SubResource("Animation_lwdu7"),
+"idle": SubResource("Animation_feul5")
+}
+
+[node name="Goblin" type="CharacterBody2D" groups=["goblin"]]
+script = ExtResource("1_dxx35")
+gift = ExtResource("2_3qee2")
+
+[node name="Goblin_Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_cpc2y")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_t7ne0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 10)
+shape = SubResource("CapsuleShape2D_i1qbn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(6.8, 4.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_75qb1")
+}
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_du0fm")
+
+[node name="Pocket" type="Node2D" parent="." groups=["pocket"]]
+position = Vector2(14, 3)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

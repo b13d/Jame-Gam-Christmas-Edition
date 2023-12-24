@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcrwaprijvipb"]
+
+[ext_resource type="PackedScene" uid="uid://b6umvg3mnh3jc" path="res://scenes/elf/elf.tscn" id="1_xltqx"]
+[ext_resource type="PackedScene" uid="uid://dcguc4xowi2if" path="res://scenes/gift/gift.tscn" id="2_8v2e0"]
+[ext_resource type="PackedScene" uid="uid://cu0p5a36mtge3" path="res://scenes/home/home.tscn" id="3_qx0wo"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Elf" parent="." instance=ExtResource("1_xltqx")]
+position = Vector2(-91, 1)
+
+[node name="Gift" parent="." node_paths=PackedStringArray("elf") instance=ExtResource("2_8v2e0")]
+position = Vector2(99, 0)
+input_pickable = true
+elf = NodePath("../Elf")
+
+[node name="Home" parent="." instance=ExtResource("3_qx0wo")]
+position = Vector2(-79, 25)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.6, 2.6)
+
+[connection signal="mouse_entered" from="Gift" to="Gift" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Gift" to="Gift" method="_on_mouse_exited"]
