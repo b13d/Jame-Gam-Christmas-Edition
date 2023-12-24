@@ -81,12 +81,8 @@ func _on_area_2d_area_entered(area):
 		$AreaHome.set_deferred("monitorable", true)
 	#print(body)
 	
-	
-
 #		вычисляю какой это был подарок, и возвращаю значение
 #		удаляю эльфа
-
-		#print("Я дома")
 		pass
 	pass # Replace with function body.
 

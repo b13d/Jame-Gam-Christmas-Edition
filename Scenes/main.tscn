@@ -46,16 +46,16 @@ position = Vector2(22, -1)
 script = ExtResource("4_yi4b1")
 
 [node name="Home" parent="Houses" groups=["home"] instance=ExtResource("1_bga1k")]
-position = Vector2(-155, -126)
+position = Vector2(-168, -44)
 
 [node name="Home2" parent="Houses" instance=ExtResource("1_bga1k")]
-position = Vector2(-148, -19)
+position = Vector2(-44, -41)
 
 [node name="Home3" parent="Houses" instance=ExtResource("1_bga1k")]
-position = Vector2(-40, -16)
+position = Vector2(-169, 49)
 
 [node name="Home4" parent="Houses" instance=ExtResource("1_bga1k")]
-position = Vector2(-44, -121)
+position = Vector2(-41, 52)
 
 [node name="UI" parent="." instance=ExtResource("8_7s2b3")]
 

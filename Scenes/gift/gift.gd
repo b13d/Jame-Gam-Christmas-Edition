@@ -7,8 +7,9 @@ var closest_point = {"home": null,
 "point":null
 }
 
-var gift_id
+var target_pos_for_goblins = null 
 
+var gift_id = null
 var elf_sprite_arr = [preload("res://sprites/elf/elf_01.png"), preload("res://sprites/elf/elf_02.png"), preload("res://sprites/elf/elf_03.png")] 
 
 # на эту строку будет ругаться
