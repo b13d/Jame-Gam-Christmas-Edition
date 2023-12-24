@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2djm1mj5ck35"]
+
+[ext_resource type="FontFile" uid="uid://b1emcmhrd2hpw" path="res://fonts/PENGUINATTACKCYRILLIC.OTF" id="1_5sdf4"]
+[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_u6r4e"]
+[ext_resource type="AudioStream" uid="uid://cfg2vpthfvu6y" path="res://sounds/music_menu/Ambient Music.wav" id="2_cd5oq"]
+[ext_resource type="Texture2D" uid="uid://em7mg747mqt4" path="res://sprites/Managment.png" id="4_umrkh"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u6r4e")
+
+[node name="Menu_Elements" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menu_Elements"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="GridContainer" type="GridContainer" parent="Menu_Elements"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -102.0
+offset_right = 150.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(159, 155)
+
+[node name="Button_Start" type="Button" parent="Menu_Elements/GridContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5sdf4")
+theme_override_font_sizes/font_size = 48
+text = "Start"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button_Creators" type="Button" parent="Menu_Elements/GridContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5sdf4")
+theme_override_font_sizes/font_size = 48
+text = "Creators"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Menu_Elements"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 61.0
+offset_right = 127.0
+offset_bottom = 148.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_5sdf4")
+theme_override_font_sizes/font_size = 100
+text = "MENU"
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="Menu_Elements"]
+stream = ExtResource("2_cd5oq")
+volume_db = -10.0
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="Menu_Elements"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 277.0
+offset_right = 366.0
+offset_bottom = 506.0
+texture = ExtResource("4_umrkh")
+
+[connection signal="pressed" from="Menu_Elements/GridContainer/Button_Start" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="Menu_Elements/GridContainer/Button_Creators" to="." method="_on_button_creators_pressed"]
