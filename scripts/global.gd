@@ -7,7 +7,10 @@ var gifts := {
 	"blue": 3
 }
 
+var targets_for_goblins = []
+
 var count_gifts = 9
+var count_gifts_lost = 0
 
 var arr_gift_ui = []
 

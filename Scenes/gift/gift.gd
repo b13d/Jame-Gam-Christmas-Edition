@@ -23,6 +23,9 @@ func _input(event):
 	if event.is_action_pressed("take_gift") and is_hover and not was_taked:
 		was_taked = true
 		
+		if get_parent().is_in_group("pocket"):
+			return
+		
 		for i in houses.get_children():
 			var differenceX = (i.global_position.x - self.global_position.x)**2
 			var differenceY = (i.global_position.y - self.global_position.y)**2

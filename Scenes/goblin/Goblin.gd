@@ -15,95 +15,95 @@ var id_gift = 0
 func _ready():
 	$AnimationPlayer.play("idle")
 	direction = (target - global_position).normalized()
-	
 
 func _physics_process(delta):
-
 	if direction.x < 0:
 		$Goblin_Icon.flip_h = true
 	else:
 		$Goblin_Icon.flip_h = false
-	
 		
-	#translate(direction * 100 * delta)
 	if not was_hit:
 		self.position += direction
 
-
-
-func _on_area_2d_area_entered(area):
-	if area.is_in_group("anvil") and not area.was_hit and not was_hit:
-		was_hit = true
-		$AnimationPlayer.play("hit")
-		#is_run = true
-		
-		if $Gift.visible == true:
-			var new_gift = gift.instantiate()
-			var place_gifts = get_node("/root/Main/Gifts")
-			
-			
-			new_gift.get_node("Sprite").texture = $Gift.get_node("Sprite").texture
-
-			new_gift.gift_id = id_gift
-			new_gift.position = self.position
-			place_gifts.call_deferred("add_child", new_gift)
-			$Gift.visible = false
-			pass
-		
-		await get_tree().create_timer(1).timeout
-		was_hit = false
-		#is_run = false
-		$AnimationPlayer.play("idle")
-# 		Тут другая анимация нужна, того что гоблин убегает 
-# 		от стыда после потери подарка
-		pass
-
-	elif area.is_in_group("entrance") and Global.count_gifts > 0 and not goblin_taked_gift:
-		direction = (place_to_out - global_position).normalized()
-		
-		goblin_taked_gift = true
-		
-		var has_gift = [] 
-		
-		for i in Global.gifts:
-			if Global.gifts.get(i) > 0:
-				has_gift.append(i)
-			pass
-
-		if has_gift.size() == 0:
-			return false
-
-		var current_gift = has_gift[randi_range(0, has_gift.size() - 1)]
-		
-		print(current_gift)
-		
-		Global.gifts[current_gift] = Global.gifts.get(current_gift) - 1
-		
-		#var Global.gifts.values()[randi_range(0, Global.gifts.size())] 
-		for i in Global.arr_gift_ui:
-			#print(i)
-			i.emit_signal("refresh_text")
-			pass
-		
-		Global.count_gifts -= 1
-		
-		
-		if current_gift == "red":
-			id_gift = 0
-		elif current_gift == "yellow":
-			id_gift = 1
-		elif current_gift == "blue":
-			id_gift = 2
-		
-		if $Gift != null:
-			$Gift.get_node("Sprite").texture = Global.arr_gift_ui[id_gift].texture
-			$Gift.visible = true
-			$Gift.was_taked = true
-		
-		
-
-
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	if $Gift != null and $Gift.visible:
+	if $Pocket.get_child_count() != 0:
+		Global.count_gifts_lost += 1
 		get_parent().get_parent().emit_signal("show_message")
 	queue_free()
+
+func _on_area_2d_area_entered(area):
+	#print(area)
+	if (area.is_in_group("anvil")):
+		is_run = true
+		$AnimationPlayer.play("hit")
+		was_hit = true
+		await get_tree().create_timer(1).timeout
+		$AnimationPlayer.play("idle")
+		was_hit = false
+		
+		if $Pocket.get_child_count() != 0:
+			
+			var fell_out_gift = gift.instantiate()
+			fell_out_gift.get_node("Sprite").texture = $Pocket.get_child(0).get_node("Sprite").texture
+			fell_out_gift.position = self.global_position
+			get_node("/root/Main/Gifts").add_child(fell_out_gift)
+			
+			#print(get_parent().position)
+			if $Pocket.get_child_count() > 0:
+				$Pocket.get_child(0).queue_free()
+		pass
+	
+	elif (area.is_in_group("entrance") or area.is_in_group("gift")) and $Pocket.get_child_count() == 0:
+		if check_count_gifts(area):
+			if not is_run:
+				create_gift()
+				
+				if area.is_in_group("gift"):
+					destory_gift_on_ground(area)
+			pass
+	pass # Replace with function body.
+
+func create_gift():
+	var index = 0
+	var count_gifts = []
+	Global.count_gifts -= 1
+	
+	for i in Global.gifts:
+		print(Global.gifts[i])
+		if Global.gifts[i] > 0:
+			count_gifts.append(index)
+		index += 1
+	pass
+	
+	print(count_gifts)
+
+	var rnd_num = randi_range(0, count_gifts.size() - 1)
+	var type_gift = Global.arr_gift_ui[rnd_num]
+	var new_gift = gift.instantiate()
+	new_gift.was_taked = true
+	new_gift.get_node("Sprite").texture = type_gift.texture
+	new_gift.position = Vector2.ZERO 
+	
+	subtraction_count_gift(count_gifts[rnd_num])
+	
+	$Pocket.call_deferred("add_child", new_gift) 
+		
+func subtraction_count_gift(num):
+	Global.gifts[Global.gifts.keys()[num]] -= 1
+	Global.arr_gift_ui[num].emit_signal("refresh_text")
+	pass
+
+func destory_gift_on_ground(old_gift):
+	call_deferred("queue_free", old_gift)
+	pass
+
+func check_count_gifts(area):
+	if Global.count_gifts == 0:
+		return false
+	if area.is_in_group("gift"):
+		if area.was_taked:
+			return false
+
+	return true
+
+	pass

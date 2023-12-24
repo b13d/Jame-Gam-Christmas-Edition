@@ -46,8 +46,8 @@ func _go_to(pos):
 	
 	#print(difference)
 	
-	print("global_position: %s" % global_position)
-	print("pos: %s " % pos)
+	#print("global_position: %s" % global_position)
+	#print("pos: %s " % pos)
 	if global_position.x < pos.x:
 		$SprPerson.flip_h = false
 	else:

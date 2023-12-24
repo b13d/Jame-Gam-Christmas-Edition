@@ -18,14 +18,17 @@ func create_goblin(pos):
 	var _goblin = goblin.instantiate()
 	path_follow_2d.progress_ratio = randf()
 	_goblin.global_position = path_follow_2d.global_position
-	_goblin.target = pos
+	
+	var rnd_num_target = randi_range(0, Global.targets_for_goblins.size() - 1)
+	_goblin.target = Global.targets_for_goblins[rnd_num_target]
+	#_goblin.target = pos
 	
 	goblin_place.add_child(_goblin)
 	path_follow_2d.progress_ratio = randf()
 	_goblin.place_to_out = path_follow_2d.global_position
 
 func _on_timer_spawn_goblin_timeout():
-	if Global.count_gifts > 0:
+	if Global.count_gifts_lost != 9:
 		var current_house = get_node(String(arr_house[randi_range(0,3)]))
 		create_goblin(current_house.position)
 	pass # Replace with function body.
